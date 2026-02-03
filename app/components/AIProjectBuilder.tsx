@@ -828,10 +828,10 @@ export default function AIProjectBuilder() {
     setShowStepClarifyModal(false);
   }, [step, stepClarifyQuestions, stepClarifyAnswers, getStepFingerprint]);
 
-  const stepTitleClass = "text-2xl sm:text-5xl font-semibold tracking-tight text-white";
+  const stepTitleClass = "text-xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-white break-words";
   const stepSubtitleClass = "mt-3 text-sm text-white/55";
-  const btnPrimary = "rounded-full bg-white px-6 py-3 text-[#0F0F0F] font-semibold text-sm transition hover:bg-white/90 disabled:opacity-50";
-  const btnSecondary = "rounded-full border border-white/25 px-6 py-3 text-white/90 text-sm font-medium transition hover:bg-white/10";
+  const btnPrimary = "rounded-full bg-white px-5 py-3 sm:px-6 text-[#0F0F0F] font-semibold text-sm transition hover:bg-white/90 disabled:opacity-50 min-h-[44px] sm:min-h-0 touch-manipulation";
+  const btnSecondary = "rounded-full border border-white/25 px-5 py-3 sm:px-6 text-white/90 text-sm font-medium transition hover:bg-white/10 min-h-[44px] sm:min-h-0 touch-manipulation";
 
   const handleReset = useCallback(() => {
     setStep(1);
@@ -901,14 +901,14 @@ export default function AIProjectBuilder() {
 
   return (
     <div className={`w-full ${step >= 1 && step <= 7 ? "max-w-none" : ""}`}>
-      <div className="flex items-center justify-between gap-4 mb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-4">
         <h2 className={stepTitleClass}>
           {stepTitle}
         </h2>
         <button
           type="button"
           onClick={handleReset}
-          className="cursor-pointer text-sm text-white/50 hover:text-white/80 transition shrink-0"
+          className="cursor-pointer text-sm text-white/50 hover:text-white/80 transition shrink-0 min-h-[44px] sm:min-h-0 py-2 sm:py-0 touch-manipulation"
         >
           Сбросить конструктор
         </button>
@@ -922,7 +922,7 @@ export default function AIProjectBuilder() {
               className={`align-top max-w-full ${description.trim() ? "inline-block" : "block w-full"}`}
             >
               <div
-                className={`relative text-3xl font-light py-3 pr-4 min-h-[4.5rem] ${description.trim() ? "inline-block max-w-full" : "block w-full"}`}
+                className={`relative text-xl sm:text-2xl md:text-3xl font-light py-3 pr-4 min-h-[4.5rem] ${description.trim() ? "inline-block max-w-full" : "block w-full"}`}
                 style={{ wordBreak: "break-word" }}
               >
                 <span
@@ -937,7 +937,7 @@ export default function AIProjectBuilder() {
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Введите текст..."
                   rows={1}
-                  className="absolute inset-0 w-full h-full text-3xl font-light resize-none rounded-none border-0 border-transparent bg-transparent p-0 py-3 pr-4 text-white placeholder:text-white/40 outline-none focus:ring-0 overflow-hidden"
+                  className="absolute inset-0 w-full h-full text-xl sm:text-2xl md:text-3xl font-light resize-none rounded-none border-0 border-transparent bg-transparent p-0 py-3 pr-4 text-white placeholder:text-white/40 outline-none focus:ring-0 overflow-hidden"
                   disabled={loading}
                 />
               </div>
@@ -1005,7 +1005,7 @@ export default function AIProjectBuilder() {
                   next[i] = e.target.value.trim();
                   setBrief((b) => ({ ...b, referenceUrls: next.filter(Boolean) }));
                 }}
-                className="w-full text-3xl font-light bg-transparent border-0 outline-none text-white placeholder:text-white/40 py-2"
+                className="w-full text-lg sm:text-xl md:text-2xl lg:text-3xl font-light bg-transparent border-0 outline-none text-white placeholder:text-white/40 py-2"
               />
             ))}
           </div>
@@ -1106,7 +1106,7 @@ export default function AIProjectBuilder() {
       {/* Экран 4: Структура страниц */}
       {step === 4 && aiStructure && (
         <div key="step4" className="animate-fade animate-step">
-          <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
             {[
               ...aiStructure.recommendedPages.map((pageId) => ({ id: pageId, label: aiStructure.pageLabels?.[pageId] ?? PAGE_LABELS_RU[pageId] ?? (pageId.charAt(0).toUpperCase() + pageId.slice(1).replace(/_/g, " ")), explanation: aiStructure.explanation[pageId], isExtra: false })),
               ...extraPages.filter((ep) => !aiStructure.recommendedPages.includes(ep.id)).map((ep) => ({ id: ep.id, label: ep.label, explanation: ep.explanation, isExtra: true })),
@@ -1677,7 +1677,7 @@ export default function AIProjectBuilder() {
           <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-8">
             {/* Левая часть: цена и действия */}
             <div className="flex-1 min-w-0 lg:min-w-0 flex flex-col gap-4">
-              <p className="text-3xl font-semibold text-white">
+              <p className="text-xl sm:text-2xl md:text-3xl font-semibold text-white break-words">
                 Ориентировочная стоимость:{" "}
                 {priceRange.min.toLocaleString("ru")} – {priceRange.max.toLocaleString("ru")} ₽
               </p>
@@ -1756,23 +1756,23 @@ export default function AIProjectBuilder() {
             </div>
             {/* Правая часть: резюме */}
             <div className="flex-1 min-w-0 lg:min-w-0">
-              <div className=" text-3xl text-white/80 space-y-1 mb-5">
+              <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/80 space-y-1 mb-5">
                 <p className="font-semibold text-white/90 mb-2">Этапы:</p>
                 {getTimelineStages(config).map((s, i) => (
-                  <div key={i} className="flex justify-between text-2xl"><span>{s.name}</span><span>{s.minWeeks}–{s.maxWeeks} нед.</span></div>
+                  <div key={i} className="flex justify-between text-base sm:text-lg md:text-xl lg:text-2xl"><span>{s.name}</span><span>{s.minWeeks}–{s.maxWeeks} нед.</span></div>
                 ))}
-                <p className="text-white/70 text-xl text-right">
+                <p className="text-white/70 text-sm sm:text-base md:text-lg lg:text-xl text-right">
                   Примерно {timelineWeeks.minWeeks}–{timelineWeeks.maxWeeks} недель
                 </p>
               </div>
-              <dl className=" text-white/80 space-y-2">
+              <dl className="text-white/80 space-y-2 text-base sm:text-lg md:text-xl">
                 <div>
-                  <dt className="text-white/50 text-2xl">Тип проекта</dt>
-                  <dd className="mt-0.5 font-medium text-xl">{PROJECT_TYPE_LABELS[config.projectType]}</dd>
+                  <dt className="text-white/50">Тип проекта</dt>
+                  <dd className="mt-0.5 font-medium">{PROJECT_TYPE_LABELS[config.projectType]}</dd>
                 </div>
                 <div>
-                  <dt className="text-white/50 text-2xl">Страницы</dt>
-                  <dd className="mt-0.5 font-medium text-xl">
+                  <dt className="text-white/50">Страницы</dt>
+                  <dd className="mt-0.5 font-medium break-words">
                     {config.pages.length
                       ? config.pages
                           .map(
@@ -1784,8 +1784,8 @@ export default function AIProjectBuilder() {
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-white/50 text-2xl">Модули</dt>
-                  <dd className="mt-0.5 font-medium text-xl">
+                  <dt className="text-white/50">Модули</dt>
+                  <dd className="mt-0.5 font-medium break-words">
                     {config.modules.length
                       ? config.modules
                           .map(
@@ -1797,12 +1797,12 @@ export default function AIProjectBuilder() {
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-white/50 text-2xl">Стиль дизайна</dt>
-                  <dd className="mt-0.5 font-medium text-xl">{DESIGN_STYLE_LABELS[brief.designStyle] ?? brief.designStyle}</dd>
+                  <dt className="text-white/50">Стиль дизайна</dt>
+                  <dd className="mt-0.5 font-medium">{DESIGN_STYLE_LABELS[brief.designStyle] ?? brief.designStyle}</dd>
                 </div>
                 <div>
-                  <dt className="text-white/50 text-2xl">Сроки</dt>
-                  <dd className="mt-0.5 font-medium text-xl">{TIMELINE_LABELS[config.timeline]}</dd>
+                  <dt className="text-white/50">Сроки</dt>
+                  <dd className="mt-0.5 font-medium">{TIMELINE_LABELS[config.timeline]}</dd>
                 </div>
               </dl>
             </div>
@@ -1821,7 +1821,7 @@ export default function AIProjectBuilder() {
             aria-labelledby="step-clarify-title"
           >
             <div
-              className="relative w-full max-w-lg rounded-2xl border border-white/15 bg-[#0F0F0F] p-6 shadow-xl"
+              className="relative w-full max-w-lg rounded-2xl border border-white/15 bg-[#0F0F0F] p-4 sm:p-6 shadow-xl my-4 sm:my-0"
               onClick={(e) => e.stopPropagation()}
             >
               <h3 id="step-clarify-title" className="text-xl font-semibold text-white mb-4">
@@ -1868,14 +1868,14 @@ export default function AIProjectBuilder() {
         typeof document !== "undefined" &&
         createPortal(
           <div
-            className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60"
+            className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-4 bg-black/60 overflow-y-auto"
             onClick={() => setShowCommentModal(false)}
             role="dialog"
             aria-modal="true"
             aria-labelledby="comment-modal-title"
           >
             <div
-              className="relative w-full max-w-lg rounded-2xl border border-white/15 bg-[#0F0F0F] p-6 shadow-xl"
+              className="relative w-full max-w-lg rounded-2xl border border-white/15 bg-[#0F0F0F] p-4 sm:p-6 shadow-xl my-4 sm:my-0"
               onClick={(e) => e.stopPropagation()}
             >
               <h3 id="comment-modal-title" className="text-xl font-semibold text-white mb-4">
@@ -1907,14 +1907,14 @@ export default function AIProjectBuilder() {
         typeof document !== "undefined" &&
         createPortal(
           <div
-            className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60"
+            className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-4 bg-black/60 overflow-y-auto"
             onClick={() => setShowMainBlocksModal(false)}
             role="dialog"
             aria-modal="true"
             aria-labelledby="main-blocks-modal-title"
           >
             <div
-              className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl border border-white/15 bg-[#0F0F0F] p-6 shadow-xl"
+              className="relative w-full max-w-2xl max-h-[85vh] sm:max-h-[90vh] overflow-y-auto rounded-2xl border border-white/15 bg-[#0F0F0F] p-4 sm:p-6 shadow-xl my-4 sm:my-0"
               onClick={(e) => e.stopPropagation()}
             >
               <h3 id="main-blocks-modal-title" className="text-xl font-semibold text-white mb-4">
@@ -1996,14 +1996,14 @@ export default function AIProjectBuilder() {
       {showPriceModal && typeof document !== "undefined" &&
         createPortal(
           <div
-            className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60"
+            className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-4 bg-black/60 overflow-y-auto"
             onClick={() => setShowPriceModal(false)}
             role="dialog"
             aria-modal="true"
             aria-labelledby="price-modal-title"
           >
             <div
-              className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl border border-white/15 bg-[#0F0F0F] p-6 shadow-xl"
+              className="relative w-full max-w-lg max-h-[85vh] sm:max-h-[90vh] overflow-y-auto rounded-2xl border border-white/15 bg-[#0F0F0F] p-4 sm:p-6 shadow-xl my-4 sm:my-0"
               onClick={(e) => e.stopPropagation()}
             >
               <h3 id="price-modal-title" className="text-xl font-semibold text-white mb-4">
@@ -2052,14 +2052,14 @@ export default function AIProjectBuilder() {
       {showBriefModal && briefText && typeof document !== "undefined" &&
         createPortal(
           <div
-            className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60"
+            className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-4 bg-black/60 overflow-y-auto"
             onClick={() => setShowBriefModal(false)}
             role="dialog"
             aria-modal="true"
             aria-labelledby="brief-modal-title"
           >
             <div
-              className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl border border-white/15 bg-[#0F0F0F] p-6 shadow-xl"
+              className="relative w-full max-w-2xl max-h-[85vh] sm:max-h-[90vh] overflow-y-auto rounded-2xl border border-white/15 bg-[#0F0F0F] p-4 sm:p-6 shadow-xl my-4 sm:my-0"
               onClick={(e) => e.stopPropagation()}
             >
               <h3 id="brief-modal-title" className="text-xl font-semibold text-white mb-4">
@@ -2090,14 +2090,14 @@ export default function AIProjectBuilder() {
       {showChecklistModal && typeof document !== "undefined" &&
         createPortal(
           <div
-            className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60"
+            className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-4 bg-black/60 overflow-y-auto"
             onClick={() => setShowChecklistModal(false)}
             role="dialog"
             aria-modal="true"
             aria-labelledby="checklist-modal-title"
           >
             <div
-              className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl border border-white/15 bg-[#0F0F0F] p-6 shadow-xl"
+              className="relative w-full max-w-lg max-h-[85vh] sm:max-h-[90vh] overflow-y-auto rounded-2xl border border-white/15 bg-[#0F0F0F] p-4 sm:p-6 shadow-xl my-4 sm:my-0"
               onClick={(e) => e.stopPropagation()}
             >
               <h3 id="checklist-modal-title" className="text-xl font-semibold text-white mb-4">
@@ -2132,14 +2132,14 @@ export default function AIProjectBuilder() {
       {showRecommendationsModal && typeof document !== "undefined" &&
         createPortal(
           <div
-            className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60"
+            className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-4 bg-black/60 overflow-y-auto"
             onClick={() => setShowRecommendationsModal(false)}
             role="dialog"
             aria-modal="true"
             aria-labelledby="recommendations-modal-title"
           >
             <div
-              className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl border border-white/15 bg-[#0F0F0F] p-6 shadow-xl"
+              className="relative w-full max-w-lg max-h-[85vh] sm:max-h-[90vh] overflow-y-auto rounded-2xl border border-white/15 bg-[#0F0F0F] p-4 sm:p-6 shadow-xl my-4 sm:my-0"
               onClick={(e) => e.stopPropagation()}
             >
               <h3 id="recommendations-modal-title" className="text-xl font-semibold text-white mb-4">
@@ -2181,7 +2181,7 @@ export default function AIProjectBuilder() {
         typeof document !== "undefined" &&
         createPortal(
           <div
-            className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60"
+            className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-4 bg-black/60 overflow-y-auto"
             style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0 }}
             onClick={() => setShowLeadFormModal(false)}
             role="dialog"
@@ -2189,7 +2189,7 @@ export default function AIProjectBuilder() {
             aria-labelledby="modal-title"
           >
             <div
-              className="relative w-full max-w-md rounded-2xl border border-white/15 bg-[#0F0F0F] p-6 shadow-xl"
+              className="relative w-full max-w-md rounded-2xl border border-white/15 bg-[#0F0F0F] p-4 sm:p-6 shadow-xl my-4 sm:my-0"
               onClick={(e) => e.stopPropagation()}
             >
               <h3 id="modal-title" className="text-xl font-semibold text-white">
