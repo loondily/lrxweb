@@ -1,26 +1,101 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+  font-family: "Gilroy";
+  src: url("/font/Gilroy-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("/font/gilroy-medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("/font/gilroy-semibold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("/font/Gilroy-ExtraBold.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: "Gilroy", ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Gilroy", ui-sans-serif, system-ui, sans-serif;
+  background-color: #0f0f0f;
+}
+
+@keyframes button-appear {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+button {
+  cursor: pointer;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade {
+  animation: fade-in 0.35s ease-out forwards;
+}
+
+@keyframes step-slide {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-step {
+  animation: step-slide 0.3s ease-out forwards;
+}
+
+/* Карточки структуры: скругления в Safari (!important перебивает переопределения) */
+.structure-card {
+  border-radius: 12px !important;
+  -webkit-border-radius: 12px !important;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Сетка модулей (Функционал): без отступов от краёв по ширине */
+.func-modules {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
